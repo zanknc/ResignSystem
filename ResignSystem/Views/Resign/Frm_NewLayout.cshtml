@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewData["Title"] = "Frm_NewLayout";
+    Layout = "~/Layout/_Menu_Test.cshtml";
+}
+<div class="topnav">
+    <div class="container">
+        <a href="#">Home</a>
+        @*<input type="text" class="form-control" />
+            <button type="button" class="btn btn-dark">Search! </button>*@
+        @*<button type="button" class="btn btn-success" style="background-color: #475850; border-color: #67736d; float: right;">Click here!</button>*@
+    </div>
+
+
+    @*<h1>Frm_NewLayout</h1>*@
+
+</div>
+
+<div class="body_style">
+
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-5 card_form" style=" ">
+            <div class="contain_header">
+                <h5 class="textH5">Charts Operator Resign</h5>
+            </div>
+            <div class="contain_body">
+                <div class="row">
+
+
+                    <div class="col-md-12 " style=" ">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 " style="background: #00000080; backdrop-filter: blur(px); border-radius: 20px 20px 0px 0px; text-align: center; color: white; height: 40px; padding-top: 5px; width: 96%; margin-left: 15px; ">
+                        Upload
+                    </div>
+
+                    TEST
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-5 card_form" style=" ">
+            <div class="contain_header">
+                <h5 class="textH5">Data Resign</h5>
+            </div>
+            <div class="contain_body">
+
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 card_form" style="border-radius: 20px 20px 5px 5px; height: 80px; height: 120px; background: #155442b3; backdrop-filter: blur(3px); ">
+            <div class="contain_header">
+                <h5 class="textH5">Resign Download</h5>
+            </div>
+            <div class="contain_body" style=" ">
+                <div class="row" style=" margin-top: 20px;">
+
+
+                    <div class="col-md-2" style="text-align: end; padding-top: 5px; color:white; ">Resign Date :   </div>
+                    <div class="col-md-4">
+                        <select id="Ddl_ResignDate" class="form-control" style="opacity: 30%;">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">   <button type="button" style="background: #122b23; border: solid 1px #1d644f;" name="btn_Download" id="btn_Download" class="btn btn-success">Download Report</button> </div>
+
+                    <div class="col-md-2">  </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-1"></div>
+
+
+    </div>
+    @*<div class="row">
+            <div class="col-md-12">
+                <div class="contain_header">
+                    HEADER
+                </div>
+                <div class="contain_body">
+                    BODY
+                </div>
+            </div>
+        </div>*@
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        GetCharts();
+       
+    });
+    function GetCharts() {
+
+        const labels = Utils.months({ count: 7 });
+        const data = {
+            labels: labels,
+            datasets: [{
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                label: 'My First Dataset',
+                data: [65, 59, 80, 81, 56, 55, 40],
+                fill: true,
+                borderColor: 'rgb(75, 192, 192)',
+                tension: 0.1
+            }]
+        };
+        const config = {
+            type: 'line',
+            data: data,
+        };
+
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const myChart = new Chart(ctx, {
+            config
+        }
+
+        
+    }
+</script>

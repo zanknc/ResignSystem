@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>@ViewBag.Title</title>
+
+    <!-- Fontfaces CSS-->
+
+    <script src="~/lib/jquery/jquery.slim.min.js"></script>
+    <link href="~/css/font-face.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <script src="~/npm/sweetalert2@11.js"></script>
+
+    <script type="text/javascript" charset="utf8" src="~/1.12.1/js/dataTables.bootstrap5.min.js" defer></script>
+    <script type="text/javascript" charset="utf8" src="~/1.12.1/js/jquery.dataTables.min.js" defer></script>
+    <script src="~/npm/popper.js@1.12.9/dist/popper.min.js" crossorigin="anonymous"></script>
+
+
+
+    <script src="~/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="~/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/ajax/libs/twitter-bootstrap/5.1.3/css/dataTables.bootstrap5.min.css" />
+
+
+
+    <link href="~/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="~/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="~/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="~/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="~/css/theme.css" rel="stylesheet" media="all">
+
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            background-image: url("/img/mountain.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            background-attachment: fixed
+        }
+
+        .head_style {
+            text-align: center;
+            background: #0000004d;
+            margin: 1% 1% 1% 1%;
+            border-radius: 15px;
+            padding: 10px;
+            height: 60px;
+        }
+        
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            /* Style the topnav links */
+            .topnav a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            .topnav input {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                /* Change color on hover */
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+        .contain_header {
+            background: #00000080;
+            backdrop-filter: blur(px);
+            border-radius: 20px 20px 0px 0px;
+            text-align: center;
+            color: white;
+            height: 40px;
+            padding-top: 5px;
+        }
+
+
+        .card_form {
+            padding: 0;
+            margin-top: 20px;
+            margin-right: 10px;
+            background: #00000080;
+            height: 600px;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 20px;
+        }
+        .textH5{
+            color:white;
+
+        }
+    </style>
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

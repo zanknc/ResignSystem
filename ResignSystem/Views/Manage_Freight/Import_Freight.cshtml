@@ -1,0 +1,537 @@
+﻿
+@{
+    ViewData["Title"] = "Import Freight BOI";
+    Layout = "~/Layout/_Menu.cshtml";
+}
+@*<h3 style="text-align: center; margin-top: 20px; color: #787070;">IMPORT FRIEGHT BOI</h3>*@
+<div style="max-width: 100%; /*background-color: #f7f7f7;*/ background-color:white; padding: 50px; box-shadow: 0 30px 60px 0 rgb(0 0 0 / 15%); height:200%; ">
+
+
+    <div>
+        <div class="row">
+
+            <div class="col-md-2">
+                <p>D/N <input type="text" id="Txt_DN" name="Txt_DN" class="form-control" /></p>
+            </div>
+            <div class="col-md-2">
+                <p>YEAR MONTH <input type="date" id="Ddl_date" name="Ddl_date" class="form-control" /></p>
+            </div>
+            <div class="col-md-2">
+                <p>
+                    FORWARDER <select class="form-control" id="Ddl_Forwardd" name="Ddl_Forwardd">
+                        <option value="0"> -- select forwarder --</option>
+
+                        @foreach (var item in ViewBag.Forwarder.Rows)
+                        {
+                            <option value="@item["ForwarderCode"]">@item["ForwarderName"]</option>
+                        }
+
+                    </select>
+
+                </p>
+            </div>
+            <div class="col-md-2">
+                <p>INVOICE <input type="text" class="form-control" id="Txt_Invoice" name="Txt_Invoice" /></p>
+            </div>
+            <div class="col-md-2">
+                <p>RENT DAY <input type="date" class="form-control" id="Txt_RentDay" name="Txt_RentDay" /></p>
+            </div>
+            <div class="col-md-2">
+
+
+            </div>
+
+        </div>
+    </div>
+    <br />
+
+    <div class="row">
+        <div class="col-md-2">
+            <p>@ViewBag.Purpose<input type="text" class="form-control" id="Txt_Vat" name="Txt_Vat" /></p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                TRANSPORTATION <select class="form-control" id="Ddl_Transport" name="Ddl_Transport">
+                    <option value="0"> -- select Transportation --</option>
+                    @foreach (var item in ViewBag.Transportation.Rows)
+                    {
+                        <option value="@item["ShipmentCateg"]">@item["ShipmentName"]</option>
+                    }
+                </select>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                DELIVERY <select class="form-control" id="Ddl_Delivery" name="Ddl_Delivery">
+                    <option value="0"> -- select delivery --</option>
+
+                    @foreach (var item in ViewBag.Delivery.Rows)
+                    {
+                        <option value="@item["DeliveryCode"]">@item["DeliveryName"]</option>
+                    }
+                </select>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                SUPPLIER  <select class="form-control" id="Ddl_Supplier" name="Ddl_Supplier">
+                    <option value="0"> -- select supplier --</option>
+
+
+                    @foreach (var item in ViewBag.Supplier.Rows)
+                    {
+                        <option value="@item["SupplierCode"]">@item["SupplierName"]</option>
+                    }
+                </select>
+            </p>
+        </div>
+        <div class="col-md-2">
+            <p>V/W <input type="number" class="form-control" id="Txt_VM" name="Txt_VM" /></p>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-2">
+            <p>ETA DATE <input type="date" class="form-control" id="Txt_ETA" name="Txt_ETA" /></p>
+        </div>
+        <div class="col-md-2">
+            <p>STORAGE CHANGE <input type="text" class="form-control" id="Txt_Storage" name="Txt_Storage" /></p>
+        </div>
+        <div class="col-md-2">
+            <p>
+                COUNTRY
+                <select class="form-control" id="Ddl_Country" name="Ddl_Country">
+                    <option value="0">-- select country --</option>
+                    @foreach (var item in ViewBag.Country.Rows)
+                    {
+                        <option value="@item["CountryCode"]">@item["CountryName"]</option>
+                    } }
+                </select>
+            </p>
+        </div>
+        <div class="col-md-2">
+            @*<button type="button" id="btnInsertHeader" name="btnInsertHeader" class="btn btn-dark" style="margin-top:15px;">Insert header</button>*@
+            <h4 style="color: black; margin-top: 25px; float:right;">[ F1 : INSERT ]</h4>
+        </div>
+        <div class="col-md-2">
+            <h4 style="color: black; margin-top: 25px;">[ F2 : CLEAR ]</h4>
+        </div>
+
+    </div>
+    <hr /><br />
+    Search :  <input type="text" style="border: solid 1px lightgray; margin-bottom: 20px; padding: 5px; " class="searchEdit" id="searchEdit" placeholder="Search" /> <br />
+    <div style="overflow-x:auto;">
+
+
+
+        <table class="table table-bordered" id="Table_dataFeight">
+            <thead>
+                <tr>
+                    <th style="width:200px;">TITLE</th>
+                    <th scope="col">TERMINAL</th>
+                    <th scope="col">LICENSE</th>
+                    <th scope="col">FREIGHT</th>
+                    <th scope="col">ORIGIN</th>
+                    <th scope="col">SHIPPING</th>
+                    <th scope="col">VAT1</th>
+                    <th scope="col">BASE TAX 3%</th>
+                    <th scope="col">BASE TAX 1%</th>
+                    <th scope="col">VAT2</th>
+                    <th scope="col">ADVANCE</th>
+                    <th scope="col">APAMOUNT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+
+                        <select class="form-control" style="width: 200px;" id="txt_title0" name="txt_title0">
+                            <option value="0">-- select title --</option>
+                            @foreach (var item in ViewBag.AccountTitle.Rows)
+                            {
+                                <option value="@item["AccountNo"]">@item["Title"]</option>
+                            }
+                        </select>
+
+
+                    </td>
+                    <td><input type="text" style="width: 200px;" id="Txt_terminal0" name="Txt_terminal0" class="form-control" /></td>
+                    <td><input type="text" style="width: 200px;" id="Txt_License0" name="Txt_License0" class="form-control" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Freight0" name="Txt_Freight0" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Origin0" name="Txt_Origin0" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Shipping0" name="Txt_Shipping0" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Vat10" name="Txt_Vat10" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_BTax30" name="Txt_BTax30" class="form-control" onchange="BaseTaxTreeChanged(0);" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Btax10" name="Txt_Btax10" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" value="0" id="Txt_Vat20" name="Txt_Vat20" class="form-control" onchange="ApmountChanged(0)" /></td>
+                    <td><input type="text" style="width: 200px;" id="Txt_Advance0" name="Txt_Advance0" class="form-control" /></td>
+                    <td><input type="text" style="width: 200px;" id="Txt_Apamount0" name="Txt_Apamount0" class="form-control" onkeypress="return InsertRowEnter(event)" /></td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <br />  <br />
+    <div style="overflow-x:auto;">
+        <p> AP Amount<input type="number" id="Ap_Amount" name="Ap_Amount" class="form-control" style="width:200px;" disabled />   <h4 style="color: black; margin-top: 25px;">[ F3 : INSERT DETAIL ]</h4> </p>
+    </div>
+</div>
+<br />
+
+@*<div style="max-width:100%; background-color:white; padding:50px;">
+
+    </div>*@
+
+<script type="text/javascript">
+        var lastID = "";
+        var noun = 0;
+        $(document).ready(function () {
+
+            /*table =  $('#Table_dataFeight').DataTable();*/
+            ClearContent();
+
+            window.addEventListener("scroll", function (event) {
+                left = this.scrollX;
+            }, false);
+
+        });
+
+        window.onkeydown = (evt) => {
+            switch (evt.keyCode) {
+                case 112:
+                    evt.preventDefault();
+                    InsertData()
+                    break;
+                case 113:
+                    evt.preventDefault();
+                    ClearContent();
+                    break;
+                case 114:
+                    evt.preventDefault();
+                    insertDetail();
+                    break;
+                default:
+
+                    return;
+            }
+        };
+
+    function ClearContentBody() {
+      
+        $('#Table_dataFeight').find('input[type="text"]').val("");
+        $('#txt_title0').val("0");
+    }
+        function ClearContent() {
+            ClearContentBody();
+            var date = new Date();
+            var day = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear();
+            console.log(day);
+            $("#Txt_DN").val('');
+            $("#Ddl_date").val(day);
+            $("#Ddl_Forwardd").val(0);
+            $("#Txt_Invoice").val('');
+            $("#Txt_RentDay").val(day); 
+            $("#Txt_Vat").val('');
+            $("#Ddl_Transport").val(0);
+            $("#Ddl_Delivery").val(0);
+            $("#Ddl_Supplier").val(0);
+            $("#Txt_VM").val('');
+            $("#Txt_ETA").val(day);
+            $("#Txt_Storage").val('');
+            $("#Ddl_Country").val(0);
+
+        }
+
+        function InsertData() {
+
+            var DN_val = $("#Txt_DN").val(),
+                yearmonth_val = $("#Ddl_date").val(),
+                Forward_val = $("#Ddl_Forwardd").val(),
+                Invoice_val = $("#Txt_Invoice").val(),
+                RentDay_val = $("#Txt_RentDay").val(),
+                Vat_val = $("#Txt_Vat").val(),
+                Transport_val = $("#Ddl_Transport").val(),
+                Delivery_val = $("#Ddl_Delivery").val(),
+                Supplier_val = $("#Ddl_Supplier").val(),
+                Vm_val = $("#Txt_VM").val(),
+                ETA_val = $("#Txt_ETA").val(),
+                Storage_val = $("#Txt_Storage").val(),
+                Country_val = $("#Ddl_Country").val();
+
+            if (DN_val == null || DN_val == "") {
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Please Insert D/N',
+                    text: ('D/N is not empty value!')
+                });
+
+                document.getElementById("Txt_DN").focus();
+
+            } else {
+
+                $.ajax({
+                    method: "POST",
+                    data: {
+                        DN: DN_val,
+                        YearMonth: yearmonth_val,
+                        Forwarder: Forward_val,
+                        Invoice: Invoice_val,
+                        RentDay: RentDay_val,
+                        Vat: Vat_val,
+                        Transport: Transport_val,
+                        Delivery: Delivery_val,
+                        Supplier: Supplier_val,
+                        Vm: Vm_val,
+                        ETA: ETA_val,
+                        Storage: Storage_val,
+                        Country: Country_val
+                    },
+                    url: 'Insert_Header',
+                    dataType: 'Json',
+                    success: function (data) {
+                        var status = data.status;
+                        if (status == "True") {
+                            Swal.fire({
+                               
+                                 icon: 'success',
+                                title: 'Insert header success',
+                                text: 'Inserd ID = ' + data.lastID
+                            });
+                            lastID = data.lastID
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Insert False',
+                                text: 'Please contact to Admin '
+                            });
+                        }
+
+                    }
+                });
+            }
+
+        }
+
+
+        function insertDetail() {
+
+
+            var RowData = [];
+            for (var i = 0; i < noun + 1; i++) {
+                var ListData = [];
+                console.log("#txt_title" + i);
+                ListData.push($("#txt_title" + i).val());
+                ListData.push($("#Txt_terminal" + i).val());
+                ListData.push($("#Txt_License" + i).val());
+                ListData.push($("#Txt_Freight" + i).val());
+                ListData.push($("#Txt_Origin" + i).val());
+                ListData.push($("#Txt_Shipping" + i).val());
+                ListData.push($("#Txt_Vat1" + i).val());
+                ListData.push($("#Txt_BTax3" + i).val());
+                ListData.push($("#Txt_Btax1" + i).val());
+                ListData.push($("#Txt_Vat2" + i).val());
+                ListData.push($("#Txt_Advance" + i).val());
+                ListData.push($("#Txt_Apamount" + i).val());
+                RowData.push(ListData);
+
+            }
+            console.log(RowData);
+            $.ajax({
+                type: 'POST',
+                traditional: true,
+                data: { RowData: RowData },
+                url: 'Insert_Freight_detail',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.status == "True") {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Insert Detail success'
+                        });
+
+                    } else {
+
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Insert False',
+                            text: 'Please contact to Admin '
+                        });
+                    }
+                }
+            });
+
+
+        }
+
+    $("#searchEdit").on('keyup', function () {
+
+
+        var input, filter, table, tr, td, i, txtValue;
+
+        filter = this.value.toUpperCase();
+        table = document.getElementById("Table_dataFeight");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+           
+                td = tr[i].getElementsByTagName("td")[0];
+
+               
+                if (td) {
+                    var a = i - 1;
+                    var title = $("#txt_title" + a + " option:selected").text(),
+                    terminal = $("#Txt_terminal" + a).val(),
+                    License = $("#Txt_License" + a).val(),
+                    Freight = $("#Txt_Freight" + a).val(),
+                    Origin = $("#Txt_Origin" + a).val(),
+                    Shipping = $("#Txt_Shipping" + a).val(),
+                    Vat1 = $("#Txt_Vat1" + a).val(),
+                    BTax3 = $("#Txt_BTax3" + a).val(),
+                    Btax1 = $("#Txt_Btax1" + a).val(),
+                    Vat2 = $("#Txt_Vat2" + a).val(),
+                    Advance = $("#Txt_Advance" + a).val(),
+                    Apamount = $("#Txt_Apamount" + a).val();
+                   /* txtValue = value.text();*/
+
+                    if (title.toUpperCase().includes(filter) || terminal.toUpperCase().includes(filter) || License.toUpperCase().includes(filter) || Freight.toUpperCase().includes(filter) ||
+                        Origin.toUpperCase().includes(filter) || Shipping.toUpperCase().includes(filter) || Vat1.toUpperCase().includes(filter) || BTax3.toUpperCase().includes(filter) ||
+                        Btax1.toUpperCase().includes(filter) || Vat2.toUpperCase().includes(filter) || Advance.toUpperCase().includes(filter) || Apamount.toUpperCase().includes(filter)) 
+                    {
+
+                        tr[i].style.display = "";
+                    } else {
+                        
+                        tr[i].style.display = "none";
+                    }
+                }
+           
+        }
+
+    });
+
+
+        $("#btnInsertHeader").click(function (e) {
+
+
+        });
+        function InsertRowEnter(e) {
+
+
+            if (e.keyCode == "13" || e.keyCode == "9") {
+                noun++;
+                /* var table = document.getElementById("Table_dataFeight");*/
+          
+
+                var content = '<tr>' +
+
+                    '<td>  <select style="width: 200px;" class="form-control" id="txt_title' + noun + '" name="txt_title' + noun + '">';
+                    @*'<option value="0">-- select title --</option>' +
+
+                    '<option value="">@Html.DropDownListFor(m => m.AccountNo, new SelectList(ViewBag.AccountTitle, "AccountNo", "Title"))</option>';*@
+
+                     content +=  '</select></td>'+
+                    '<td><input type="text" style="width: 200px;" id="Txt_terminal' + noun + '" name="Txt_terminal' + noun + '" class="form-control" /></td>' +
+                    '<td><input type="text" style="width: 200px;" id="Txt_License' + noun + '" name="Txt_License' + noun + '" class="form-control" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Freight' + noun + '" name="Txt_Freight' + noun + '" class="form-control" onchange="ApmountChanged(' + noun + ')" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Origin' + noun + '" name="Txt_Origin' + noun + '" class="form-control" onchange="ApmountChanged(' + noun + ')" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Shipping' + noun + '" name="Txt_Shipping' + noun + '" class="form-control" onchange="ApmountChanged(' + noun + ')" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Vat1' + noun + '" name="Txt_Vat1' + noun + '" class="form-control" onchange="ApmountChanged(' + noun + ')" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_BTax3' + noun + '" name="Txt_BTax3' + noun + '" onchange="BaseTaxTreeChanged(' + noun + ')" class="form-control" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Btax1' + noun + '" name="Txt_Btax1' + noun + '" class="form-control" onchange="ApmountChanged(' + noun +')" /></td>' +
+                    '<td><input type="text" value="0" style="width: 200px;" id="Txt_Vat2' + noun + '" name="Txt_Vat2' + noun + '" class="form-control" onchange="ApmountChanged(' + noun +')" /></td>' +
+                    '<td><input type="text" style="width: 200px;" id="Txt_Advance' + noun + '" name="Txt_Advance' + noun + '" class="form-control" /></td>' +
+                    '<td><input type="text" style="width: 200px;" id="Txt_Apamount' + noun + '" name="Txt_Apamount' + noun + '" class="form-control" onkeypress="return InsertRowEnter(event)" /></td>' +
+                    '</tr >';
+
+                $('#Table_dataFeight tr:last').after(content);
+                $("#txt_title" + noun).focus();
+                
+
+                $.ajax({
+                    type: 'POST',
+                    data: { Data: "" },
+                    url: 'getDropdownTitle',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                          var contentTitle = '<option value="0">-- select title --</option>';
+                        for (i = 0; i < data.length; i++) {
+                            
+                            contentTitle += '<option value="' + data[i].accountNo + '">' + data[i].title + '</option>';
+                        }
+
+                      
+                        $("#txt_title" + noun).append(contentTitle);
+                        
+                    }
+                });
+
+              
+              
+           
+                    }
+
+
+
+        }
+        function getValueDdl() {
+            $.ajax({
+                type: 'POST',
+                url: 'GetValue_DropdowList',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'Json',
+                success: function (data) {
+                    console.log(data);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+            })
+        }
+
+
+        function BaseTaxTreeChanged(n) {
+
+            var baseTax3 = 0;
+            baseTax3 = $("#Txt_BTax3" + n).val();
+
+            var vat2 = baseTax3 * 0.07;
+            $("#Txt_Vat2" + n).val(parseFloat(vat2).toFixed(2));
+        }
+
+        function ApmountChanged(n) {
+            var vat1 = $("#Txt_Vat1" + n).val(),
+                vat2 = $("#Txt_Vat2" + n).val(),
+                freight = $("#Txt_Freight" + n).val(),
+                original = $("#Txt_Origin" + n).val(),
+                shiping = $("#Txt_Shipping" + n).val();
+            var Apamount = $("#Txt_Apamount" + n).val(),
+                BTax3 = $("#Txt_BTax3" + n).val(),
+                Btax1 = $("#Txt_Btax1" + n).val(),
+                sumtotal_AP = 0;
+
+            var total = parseFloat(vat1) + parseFloat(vat2) + parseFloat(freight) + parseFloat(original) + parseFloat(shiping);
+
+            var total_Ap = total - parseFloat(vat2) - parseFloat(BTax3) - parseFloat(Btax1);
+
+            $("#Txt_Apamount" + n).val(parseFloat(total).toFixed(2));
+            $("#Txt_Advance" + n).val(parseFloat(total_Ap).toFixed(2));
+
+            for (var i = 0; i < n + 1 ; i++) {
+                sumtotal_AP += parseFloat($("#Txt_Apamount" + i).val());
+
+            }
+
+            $("#Ap_Amount").val(parseFloat(sumtotal_AP).toFixed(2));
+        }
+
+
+
+
+
+
+</script>
